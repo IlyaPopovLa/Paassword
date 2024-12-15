@@ -1,30 +1,47 @@
 password = input("Введите пароль: ")
+SpecialSym = ('$', '@', '#', '%', '(', ')', '!', '&')
 
 
-if len(password) <= 12:
-    print('Короткий')
-else:
-    print('Длинный')
+def is_very_long(password):
+    if len(password) >= 10:
+        return password
 
-
-for letter in password:
-    boolResult = letter.isdigit()
-    if boolResult:
-        print(letter, 'Цифра')
-    else:
-        print(letter, 'Буква')
-
-
-# found_digit = 'Нет цифр'
-# for digit in password:
-    # if digit.isdigit():
-        # found_digit = 'Есть цифры'
-# print(found_digit)
 
 def has_digit(password):
-    found_digit = 'Нет цифр'
-    for digit in password:
-        if digit.isdigit():
-            found_digit = 'Есть цифры'
-    return found_digit
-print(has_digit)
+    return any(digit.isdigit for digit in password)
+
+
+def has_letters(password):
+    return any(letters.isalpha for letters in password)
+
+
+def has_upper_letters(password):
+    return any(upper.isupper for upper in password)
+
+
+def has_lower_letters(password):
+    return any(lower.islower for lower in password)
+
+
+def has_symbols(password):
+    return any(symbols in SpecialSym for symbols in password)
+
+
+def main():
+    def_list = [
+        is_very_long,
+        has_digit,
+        has_letters,
+        has_upper_letters,
+        has_lower_letters,
+        has_symbols
+    ]
+    score = 0
+    for func in def_list:
+        if func(password):
+            score += 2
+    print(score)
+
+
+if __name__ == '__main__':
+    main()
