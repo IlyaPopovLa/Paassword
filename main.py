@@ -1,10 +1,5 @@
-password = input("Введите пароль: ")
-SpecialSym = ('$', '@', '#', '%', '(', ')', '!', '&')
-
-
 def is_very_long(password):
-    if len(password) >= 10:
-        return password
+    return any(len(pwd) > 10 for pwd in password)
 
 
 def has_digit(password):
@@ -24,10 +19,11 @@ def has_lower_letters(password):
 
 
 def has_symbols(password):
-    return any(symbols in SpecialSym for symbols in password)
+    return any(symbols in "$@#%()!&" for symbols in password)
 
 
 def main():
+    password = input("Введите пароль: ")
     def_list = [
         is_very_long,
         has_digit,
