@@ -1,3 +1,6 @@
+import string
+
+
 def is_very_long(password):
     return any(len(pwd) > 10 for pwd in password)
 
@@ -19,7 +22,7 @@ def has_lower_letters(password):
 
 
 def has_symbols(password):
-    return any(symbols in "$@#%()!&" for symbols in password)
+    return any(symbols in string.punctuation for symbols in password)
 
 
 def main():
